@@ -1,0 +1,56 @@
+#edit-mode: -*- python -*-
+#coding:gbk
+
+#工作路径.
+WORKROOT('../')
+
+#使用硬链接copy.
+CopyUsingHardLink(True)
+
+#C预处理器参数.
+CPPFLAGS('-D_GNU_SOURCE -D__STDC_LIMIT_MACROS -DVERSION=\\\"1.0.0.0\\\"')
+
+#C编译参数.
+CFLAGS('-g -O2 -pipe -W -Wall')
+
+#C++编译参数.
+CXXFLAGS('-g -O2 -finline-functions -pipe -W -Wall -Wreorder -Weffc++ -Wwrite-strings -Wswitch -Wpointer-arith -Wconversion -Wsign-promo -Wredundant-decls -DNDEBUG')
+#CXXFLAGS('-g -pipe -O3 -W -Wall -Wreorder -Weffc++ -Wwrite-strings -Wswitch -Wpointer-arith -Wconversion -Wsign-promo -Wredundant-decls')
+
+#IDL编译参数
+IDLFLAGS('--compack')
+
+#UBRPC编译参数
+UBRPCFLAGS('--compack')
+
+#头文件路径.
+INCPATHS('. ./include ./output ./output/include')
+
+#使用库
+#LIBS('./btfeat/lib/libburstquery.a')
+
+#链接参数.
+LDFLAGS('-lpthread -lcrypto -lrt')
+
+#依赖模块
+CONFIGS('third-64/gflags@2.0.0.100')
+CONFIGS('lib-64/utllib')
+
+user_sources='reservoir_sampling.cpp'
+user_headers=''
+
+#可执行文件
+Application('reservoir_sampling',Sources(user_sources))
+#静态库
+#StaticLibrary('sex-site',Sources(user_sources),HeaderFiles(user_headers))
+#共享库
+#SharedLibrary('ac-strategy',Sources(user_sources),HeaderFiles(user_headers))
+#子目录
+#Directory('test/utest')
+
+#TARGET('.copy-conf',
+#	ShellCommands('mkdir -p output/conf',
+#	'cp conf/* output/conf'),
+#	CleanCommands('rm -rf output/conf'))
+
+
